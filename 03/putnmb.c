@@ -1,49 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_str.c                                       :+:      :+:    :+:   */
+/*   putnmb.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eomelcha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/31 14:13:14 by eomelcha          #+#    #+#             */
-/*   Updated: 2019/01/31 18:17:25 by eomelcha         ###   ########.fr       */
+/*   Created: 2019/01/31 15:46:01 by eomelcha          #+#    #+#             */
+/*   Updated: 2019/01/31 16:14:46 by eomelcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_expand_str(char *str)
+void	ft_putnmb(int n)
 {
-	int f;
-
-	f = 0;
-	while (*str == 32 || *str == 9)
-		str++;
-	while(*str)
+	char c;
+	if (n < 0)
 	{
-		if (*str == 32 || *str == 9)
-			f = 1;
-		if (!(*str == 32 || *str == 9))
-		{
-			if (f == 1)
-			{
-				write(1, "   ", 3);
-			}
-			f = 0;
-			write(1, str, 1);
-		}
-		str++;
+		write(1, "-", 1);
+		n = -n;
+	}
+	if (n < 10)
+	{
+		c = n + '0';
+		write(1, &c, 1);
+	}
+	else
+	{
+		ft_putnmb(n / 10);
+		ft_putnmb(n % 10);
 	}
 }
 
-int		main(int argc, char **argv)
+int		main(void)
 {
-	if (argc != 2)
-		write(1, "\n", 1);
-	if (argc == 2)
-	{
-		ft_expand_str(argv[1]);
-		write(1, "\n", 1);
-	}
+	int i;
+
+	i = -1569;
+	ft_putnmb(i);
 	return (0);
 }

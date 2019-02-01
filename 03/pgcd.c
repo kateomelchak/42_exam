@@ -1,49 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_str.c                                       :+:      :+:    :+:   */
+/*   pgcd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eomelcha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/31 14:13:14 by eomelcha          #+#    #+#             */
-/*   Updated: 2019/01/31 18:17:25 by eomelcha         ###   ########.fr       */
+/*   Created: 2019/01/31 14:23:23 by eomelcha          #+#    #+#             */
+/*   Updated: 2019/01/31 15:45:51 by eomelcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_expand_str(char *str)
-{
-	int f;
-
-	f = 0;
-	while (*str == 32 || *str == 9)
-		str++;
-	while(*str)
-	{
-		if (*str == 32 || *str == 9)
-			f = 1;
-		if (!(*str == 32 || *str == 9))
-		{
-			if (f == 1)
-			{
-				write(1, "   ", 3);
-			}
-			f = 0;
-			write(1, str, 1);
-		}
-		str++;
-	}
-}
+#include <stdio.h>
+#include <stdlib.h>
 
 int		main(int argc, char **argv)
 {
-	if (argc != 2)
-		write(1, "\n", 1);
-	if (argc == 2)
+	int x;
+	int y;
+	int i;
+
+
+	if (argc != 3)
+		printf("\n");
+	if (argc == 3)
 	{
-		ft_expand_str(argv[1]);
-		write(1, "\n", 1);
+		x = atoi(argv[1]);
+		y = atoi(argv[2]);
+		if (x >= y)
+			i = y;
+		else
+			i = x;
+		while (i > 0) 
+		{
+			if ((x % i) == 0  && (y % i) == 0)
+			{
+				printf("%d", i);
+				break;
+			}
+			i--;
+		}
+		printf("\n");
 	}
 	return (0);
 }
